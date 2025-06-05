@@ -176,7 +176,7 @@ async function uploadVideo(filePath, auth) {
             console.log("Additional query executed successfully:", results);
 
             // ✅ Absolute path to Python script
-            const scriptPath = path.resolve(__dirname, "modify_videos.py");
+            const scriptPath = path.resolve(__dirname, "backup_script.py");
 
             console.log(` Running Python script at: ${scriptPath}`);
             console.log(` Video to process: ${filePath}`);

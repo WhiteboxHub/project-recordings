@@ -191,7 +191,7 @@ const dbConfig = {
 
 // 🔁 Function to run the Python script with the uploaded file path
 function callPythonScript(doneFilePath) {
-  const scriptPath = path.resolve(__dirname, 'modify_videos.py');
+  const scriptPath = path.resolve(__dirname, 'backup_script.py');
   console.log(` Running Python script at: ${scriptPath}`);
   console.log(` Video to process: ${doneFilePath}`);
 
