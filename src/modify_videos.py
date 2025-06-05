@@ -7,9 +7,8 @@ import googleapiclient.discovery
 import googleapiclient.errors
 from googleapiclient.http import MediaFileUpload
 from google.auth.transport.requests import Request
-
-# 🔧 Fix for UnicodeEncodeError in Windows terminal (especially for emojis)
 import io
+
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 
 # Setup paths
@@ -23,7 +22,7 @@ os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 # Get input path from CLI or Node.js
 if len(sys.argv) < 2:
-    print("❌ Error: Missing input video path argument.")
+    print(" Error: Missing input video path argument.")
     sys.exit(1)
 
 input_path = sys.argv[1]
@@ -49,7 +48,7 @@ def get_authenticated_service():
     if not creds or not creds.valid:
         flow = google_auth_oauthlib.flow.InstalledAppFlow.from_client_secrets_file(
             CREDENTIALS_FILE, scopes)
-        creds = flow.run_local_server(port=0)  # ✅ Correct line
+        creds = flow.run_local_server(port=0)  
 
 
     with open(TOKEN_FILE, 'wb') as token:
@@ -58,7 +57,7 @@ def get_authenticated_service():
     return googleapiclient.discovery.build("youtube", "v3", credentials=creds)
 
 def convert_video(input_path, output_path):
-    print(f"🎞️ Converting: {input_path}")
+    print(f" Converting: {input_path}")
     command = [
         'ffmpeg', '-y',
         '-i', input_path,
@@ -83,7 +82,7 @@ def upload_to_youtube(youtube, video_path, title):
             'categoryId': '22'
         },
         'status': {
-            'privacyStatus': 'unlisted'
+            'privacyStatus': 'private'
         }
     }
 
@@ -94,7 +93,7 @@ def upload_to_youtube(youtube, video_path, title):
     while response is None:
         status, response = request.next_chunk()
         if status:
-            print(f"🚀 Upload progress: {int(status.progress() * 100)}%")
+            print(f" Upload progress: {int(status.progress() * 100)}%")
 
     print(f"✅ Uploaded to YouTube Account 2: https://youtu.be/{response['id']}")
     print(f"YouTube Video ID: {response['id']}")
@@ -106,7 +105,7 @@ def main():
 
     youtube = get_authenticated_service()
     upload_to_youtube(youtube, converted_path, filename)
-    print(f"📁 Moved uploaded file to: {converted_path}")
+    print(f" Moved uploaded file to: {converted_path}")
 
 if __name__ == "__main__":
     main()

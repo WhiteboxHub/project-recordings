@@ -192,15 +192,15 @@ const dbConfig = {
 // 🔁 Function to run the Python script with the uploaded file path
 function callPythonScript(doneFilePath) {
   const scriptPath = path.resolve(__dirname, 'modify_videos.py');
-  console.log(`🔍 Running Python script at: ${scriptPath}`);
-  console.log(`🎬 Video to process: ${doneFilePath}`);
+  console.log(` Running Python script at: ${scriptPath}`);
+  console.log(` Video to process: ${doneFilePath}`);
 
   const command = `python "${scriptPath}" "${doneFilePath}"`;
 
   const python = spawn(command, { shell: true });
 
   python.stdout.on('data', (data) => {
-    console.log(`📤 Python stdout: ${data}`);
+    console.log(` Python stdout: ${data}`);
   });
 
   python.stderr.on('data', (data) => {
@@ -237,7 +237,7 @@ async function watchFolder(uploadPath, donePath, auth) {
 
     try {
       const [rows] = await connection.execute(
-        'SELECT COUNT(*) AS count FROM new_recording WHERE filename = ?',
+        'SELECT COUNT(*) AS count FROM recording WHERE filename = ?',
         [fileName]
       );
 
@@ -265,7 +265,7 @@ async function watchFolder(uploadPath, donePath, auth) {
     console.error('Watcher error:', err);
   });
 
-  console.log(`👀 Watching folder: ${uploadPath}`);
+  console.log(` Watching folder: ${uploadPath}`);
 }
 
 module.exports = watchFolder;

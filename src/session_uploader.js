@@ -150,7 +150,7 @@ async function uploadVideo(filePath, auth) {
 
       // Insert into new_recording
       const recordingQuery = `
-              INSERT INTO new_recording (batchname, description, type, classdate, link, videoid, subject, filename, lastmoddatetime, new_subject_id)
+              INSERT INTO recording (batchname, description, type, classdate, link, videoid, subject, filename, lastmoddatetime, new_subject_id)
               VALUES (?, ?, 'class', ?, ?, ?, ?, ?, ?, ?)
           `;
       const recordingValues = [
@@ -167,7 +167,7 @@ async function uploadVideo(filePath, auth) {
 
       // Insert into new_recording_batch
       const batchQuery = `
-              INSERT INTO new_recording_batch (batchname, subject, lastmoddatetime)
+              INSERT INTO recording_batch (batchname, subject, lastmoddatetime)
               VALUES (?, ?, ?)
           `;
       const batchValues = [batchname, subject, lastModDateTime];
@@ -192,7 +192,7 @@ async function uploadVideo(filePath, auth) {
 
       // Insert into new_session
       const sessionQuery = `
-              INSERT INTO new_session (title, status, sessiondate, type, subject, recorded, uploaded, link, videoid, invitation, lastmoddatetime, subject_id)
+              INSERT INTO session (title, status, sessiondate, type, subject, recorded, uploaded, link, videoid, invitation, lastmoddatetime, subject_id)
               VALUES (?, 'Completed', ?, ?, ?, 'Y', 'Y', ?, ?, 'Y', ?, ?)
           `;
       const sessionValues = [
